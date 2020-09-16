@@ -1,5 +1,5 @@
 #include "monty.h"
-/* global variable: stack_size???*/
+/* global variable: argument???*/
 /**
  * main - It's...a monty file interpreter
  * @ac: argument count
@@ -21,7 +21,8 @@ int main(int ac, char **av)
 	  Error: unknown instruction: func == NULL*/
 
 	/*perform function on stack
-	  Note: figure out how to pass argument for push*/
+	  Note: figure out how to pass argument for push
+	  global variable?*/
 
 	/*end loop*/
 
