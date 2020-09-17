@@ -1,10 +1,12 @@
 #include "monty.h"
+
 /**
  * main - It's...a monty file interpreter
  * @ac: argument count
  * @av: argument vector
  * Return: probably something ridiculous
  */
+
 int main(int ac, char **av)
 {
 	FILE *fptr;
@@ -40,6 +42,7 @@ int main(int ac, char **av)
 		(*function)(&stack, line_number);
 		token = NULL;
 		token2 = NULL;	}
+
 	fclose(fptr);
 	free_stack(stack);
 	exit(EXIT_SUCCESS);
