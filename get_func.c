@@ -14,6 +14,10 @@ void *get_func(char *str)
 		{"swap", swap},
 		{"add", add},
 		{"nop", nop},
+		{"mul", mul},
+		{"sub", sub},
+		{"div", div},
+		{"mod", mod},
 		{NULL, NULL}
 	};
 	int i;
