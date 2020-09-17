@@ -12,34 +12,37 @@ int main(int ac, char **av)
 	FILE *fptr;
 	stack_t *stack;
 	void (*function)(stack_t **stack, int line_number);
-	char *token = NULL, *token2, buffer[128];
-	int i = 2, line_number = 0;
+	char buffer[128], *token = NULL, *token2 = NULL;
+	int line_number = 0;
 
 	if (ac != 2)
-		error(1, NULL, NULL);
+	{	fprintf(stderr, "USAGE: monty file\n");
+		exit(EXIT_FAILURE);	}
 	fptr = fopen(av[1], "r");
 	if (fptr == NULL)
-		error(2, NULL, av[1]);
+	{	fprintf(stderr, "Can't open file %s\n", av[1]);
+		exit(EXIT_FAILURE);	}
 	while (fgets(buffer, sizeof(buffer), fptr))
-	{
-		line_number++;
-		/* feed first word to get_func; Error: unknown instruction: func == NULL */
+	{	line_number++;
 		while (token == NULL)
 			token = strtok(buffer, " ");
-		if (token == "push")
+		if (strcmp(token, "push") == 0)
 		{
 			while (token2 == NULL)
 				token2 = strtok(NULL, " ");
 			if (token2 != NULL)
 				var = atoi(token2);
 			else
-				error(3, &line_number, NULL);
-		}
+			{	fprintf(stderr, "L%d: usage: push integer\n", line_number);
+				exit(EXIT_FAILURE);	}}
 		function = get_func(token);
 		if (function == NULL)
-			error(4, &line_number, token);
+		{	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
+			exit(EXIT_FAILURE);	}
 		(*function)(&stack, line_number);
-	}
+		token = NULL;
+		token2 = NULL;	}
+
 	fclose(fptr);
 	free_stack(stack);
 	exit(EXIT_SUCCESS);
