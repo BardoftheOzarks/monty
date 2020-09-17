@@ -1,12 +1,13 @@
 #include "monty.h"
 /**
- * swap - swaps top two nodes
+ * add - adds top two nodes
  * @stack: it's a stack
  * @line_number: which line of script are we on?
  */
 void nop(stack_t **stack, unsigned int line_number)
 {
 	stack_t *first, *second;
+	int a, b;
 
 	if (stack)
 	{
@@ -14,16 +15,13 @@ void nop(stack_t **stack, unsigned int line_number)
 		second = first->next;
 		if (!second)
 		{
-			fprintf(stderr, "L%d: can't swap, stack too short", line_number);
+			fprintf(stderr, "L%d: can't add, stack too short", line_number);
 			exit(EXIT_FAILURE);
 		}
-		first->prev = second;
-		first->next = second->next;
-		second->next = first;
-		second->prev = NULL;
+		a = first->n;
+		b = second->n;
+		second->n = a + b;
+		free(first);
 		*stack = second;
-		first = first->next;
-		second = second->next;
-		first->prev = second;
 	}
 }
