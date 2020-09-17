@@ -4,7 +4,7 @@
  * @stack: it's a stack
  * @line_number: which line of script are we on?
  */
-void nop(stack_t **stack, unsigned int line_number)
+void add(stack_t **stack, unsigned int line_number)
 {
 	stack_t *first, *second;
 	int a, b;

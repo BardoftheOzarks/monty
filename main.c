@@ -54,7 +54,7 @@ int main(int ac, char **av)
 				exit(EXIT_FAILURE);
 			}
 		}
-		*(void**) (&function) = get_func(token);
+		function = get_func(token);
 		if (function == NULL)
 		{
 			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
