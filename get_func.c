@@ -20,6 +20,6 @@ void *get_func(char *str)
 
 	for (i = 0; (&commands[i])->opcode; i++)
 		if (strncmp((&commands[i])->opcode, str, 3) == 0)
-			return ((&commands[i])->f);
+			return (commands[i].f);
 	return (NULL);
 }

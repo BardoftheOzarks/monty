@@ -1,5 +1,6 @@
 #include "monty.h"
 /* global variable: argument???*/
+extern int var;
 /**
  * main - It's...a monty file interpreter
  * @ac: argument count
@@ -12,8 +13,8 @@ int main(int ac, char **av)
 	stack_t *stack;
 	void (*function)(stack_t **stack, int line_number);
 	char buffer[128];
-	int i = 2;
-	char *token = NULL, *token2;
+/*	int i = 2;
+ */	char *token = NULL, *token2;
 	int line_number = 0;
 
 
@@ -53,7 +54,7 @@ int main(int ac, char **av)
 				exit(EXIT_FAILURE);
 			}
 		}
-		function = get_func(token);
+		*(void**) (&function) = get_func(token);
 		if (function == NULL)
 		{
 			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
@@ -61,6 +62,8 @@ int main(int ac, char **av)
 		}
 
 		(*function)(&stack, line_number);
+		free(token);
+		free(token2);
 	}
 
 	fclose(fptr);
