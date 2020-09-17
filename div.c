@@ -1,10 +1,10 @@
 #include "monty.h"
 /**
- * div - divides second node by top node
+ * divide - divides second node by top node
  * @stack: it's a stack
  * @line_number: which line of script are we on?
  */
-void div(stack_t **stack, unsigned int line_number)
+void divide(stack_t **stack, unsigned int line_number)
 {
 	stack_t *first, *second;
 	int a, b;

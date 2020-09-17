@@ -16,14 +16,20 @@ void *get_func(char *str)
 		{"nop", nop},
 		{"mul", mul},
 		{"sub", sub},
-		{"div", div},
+		{"div", divide},
 		{"mod", mod},
+		{"pchar", pchar},
+		{"pstr", pstr},
 		{NULL, NULL}
 	};
 	int i;
+	void (*func)(stack_t **stack, unsigned int line_number);
 
 	for (i = 0; (&commands[i])->opcode; i++)
 		if (strncmp((&commands[i])->opcode, str, 3) == 0)
-			return (commands[i].f);
+		{
+			func = commands[i].f;
+			return (func);
+		}
 	return (NULL);
 }
