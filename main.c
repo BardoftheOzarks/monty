@@ -35,7 +35,7 @@ int main(int ac, char **av)
 			token = strtok(buffer, " \n");
 		if (strcmp(token, "push") == 0)
 		{
-			while (token2 == NULL)
+			while (token2 == NULL && buffer[0] != '\n')
 				token2 = strtok(NULL, " \n");
 			if (cust_isdigit(token2) == 1)
 				var = atoi(token2);
