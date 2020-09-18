@@ -6,6 +6,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <ctype.h>
 
 int var;
 /**
@@ -53,6 +54,7 @@ void nop(stack_t **stack, unsigned int line_number);
 void pchar(stack_t **stack, unsigned int line_number);
 void pstr(stack_t **stack, unsigned int line_number);
 void error(int errno, unsigned int *line_number, char *str);
+int cust_isdigit(char *str);
 void free_stack(stack_t *stack);
 
 #endif /*MONTY_H*/
