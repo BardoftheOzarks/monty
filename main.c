@@ -11,7 +11,7 @@ int main(int ac, char **av)
 {
 	FILE *fptr;
 	stack_t *stack = NULL;
-	char buffer[128], *token = NULL, *token2 = NULL;
+	char buffer[1024], *token = NULL, *token2 = NULL;
 	unsigned int line_number = 0, i;
 
 	if (ac != 2)
