@@ -20,8 +20,7 @@ int main(int ac, char **av)
 	if (fptr == NULL)
 		error(2, NULL, av[1]);
 	while (fgets(buffer, sizeof(buffer), fptr))
-	{
-		line_number++;
+	{	line_number++;
 		for (i = 0; buffer[i] != '\n'; i++)
 		{
 			if (buffer[i] == ' ')
@@ -34,16 +33,11 @@ int main(int ac, char **av)
 		while (token == NULL)
 			token = strtok(buffer, " \n");
 		if (strcmp(token, "push") == 0)
-		{
-			if ((token2 = strtok(NULL, " \n")))
-            {
-                if (cust_isdigit(token2) == 1)
-                    var = atoi(token2);
-                else
-                    error(3, &line_number, NULL);
-            }
-            else
-                error(3, &line_number, NULL);
+		{	token2 = strtok(NULL, " \n");
+			if (token2)
+				cust_isdigit(token2, line_number);
+			else
+				error(3, &line_number, NULL);
 		}
 		get_func(token, &stack, line_number);
 		token = NULL;
@@ -55,19 +49,22 @@ int main(int ac, char **av)
 }
 
 /**
- * cust_isdigit - Checks if string contains only digits.
+ * cust_isdigit - atoi string if string contains only digits.
  * @str: String to evaluate.
- * Return: 1 if str only contains digits, else 0.
+ * @line_number: Line number of file.
  */
 
-int cust_isdigit(char *str)
+void cust_isdigit(char *str, unsigned int line_number)
 {
-	int i;
+	int i, retval = 1;
 
 	for (i = 0; str[i]; i++)
 	{
 		if (isdigit(str[i]) == 0 && str[i] != '-')
-			return (0);
+			retval = 0;
 	}
-	return (1);
+	if (retval == 1)
+		var = atoi(str);
+	else
+		error(3, &line_number, NULL);
 }
