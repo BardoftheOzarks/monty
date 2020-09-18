@@ -29,7 +29,7 @@ int main(int ac, char **av)
 			else
 				break;
 		}
-		if (buffer[i] == '\n')
+		if (buffer[i] == '\n' || buffer[i] == '#')
 			continue;
 		while (token == NULL)
 			token = strtok(buffer, " \n");
