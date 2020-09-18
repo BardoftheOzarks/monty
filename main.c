@@ -36,8 +36,8 @@ int main(int ac, char **av)
 		if (strcmp(token, "push") == 0)
 		{
 			while (token2 == NULL)
-				token2 = strtok(NULL, " ");
-			if (token2 != NULL)
+				token2 = strtok(NULL, " \n");
+			if (cust_isdigit(token2) == 1)
 				var = atoi(token2);
 			else
 				error(3, &line_number, NULL);
@@ -49,4 +49,22 @@ int main(int ac, char **av)
 	fclose(fptr);
 	free_stack(stack);
 	return (0);
+}
+
+/**
+ * cust_isdigit - Checks if string contains only digits.
+ * @str: String to evaluate.
+ * Return: 1 if str only contains digits, else 0.
+ */
+
+int cust_isdigit(char *str)
+{
+	int i;
+
+	for (i = 0; str[i]; i++)
+	{
+		if (isdigit(str[i]) == 0)
+			return (0);
+	}
+	return (1);
 }
