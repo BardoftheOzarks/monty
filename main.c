@@ -12,21 +12,27 @@ int main(int ac, char **av)
 	FILE *fptr;
 	stack_t *stack = NULL;
 	char buffer[128], *token = NULL, *token2 = NULL;
-	int line_number = 0;
+	unsigned int line_number = 0, i;
 
 	if (ac != 2)
-	{	fprintf(stderr, "USAGE: monty file\n");
-		exit(EXIT_FAILURE);	}
+		error(1, NULL, NULL);
 	fptr = fopen(av[1], "r");
 	if (fptr == NULL)
-	{	fprintf(stderr, "Error: Can't open file %s\n", av[1]);
-		exit(EXIT_FAILURE);
-	}
+		error(2, NULL, av[1]);
 	while (fgets(buffer, sizeof(buffer), fptr))
 	{
 		line_number++;
+		for (i = 0; buffer[i] != '\n'; i++)
+		{
+			if (buffer[i] == ' ')
+				continue;
+			else
+				break;
+		}
+		if (buffer[i] == '\n')
+			continue;
 		while (token == NULL)
-			token = strtok(buffer, " ");
+			token = strtok(buffer, " \n");
 		if (strcmp(token, "push") == 0)
 		{
 			while (token2 == NULL)
@@ -34,10 +40,7 @@ int main(int ac, char **av)
 			if (token2 != NULL)
 				var = atoi(token2);
 			else
-			{
-				fprintf(stderr, "L%d: usage: push integer\n", line_number);
-				exit(EXIT_FAILURE);
-			}
+				error(3, &line_number, NULL);
 		}
 		get_func(token, &stack, line_number);
 		token = NULL;
