@@ -10,8 +10,7 @@
 int main(int ac, char **av)
 {
 	FILE *fptr;
-	stack_t *stack;
-	void (*function)(stack_t **stack, int line_number);
+	stack_t *stack = NULL;
 	char buffer[128], *token = NULL, *token2 = NULL;
 	int line_number = 0;
 
@@ -21,9 +20,11 @@ int main(int ac, char **av)
 	fptr = fopen(av[1], "r");
 	if (fptr == NULL)
 	{	fprintf(stderr, "Can't open file %s\n", av[1]);
-		exit(EXIT_FAILURE);	}
+		exit(EXIT_FAILURE);
+	}
 	while (fgets(buffer, sizeof(buffer), fptr))
-	{	line_number++;
+	{
+		line_number++;
 		while (token == NULL)
 			token = strtok(buffer, " ");
 		if (strcmp(token, "push") == 0)
@@ -33,17 +34,16 @@ int main(int ac, char **av)
 			if (token2 != NULL)
 				var = atoi(token2);
 			else
-			{	fprintf(stderr, "L%d: usage: push integer\n", line_number);
-				exit(EXIT_FAILURE);	}}
-		function = get_func(token);
-		if (function == NULL)
-		{	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
-			exit(EXIT_FAILURE);	}
-		(*function)(&stack, line_number);
+			{
+				fprintf(stderr, "L%d: usage: push integer\n", line_number);
+				exit(EXIT_FAILURE);
+			}
+		}
+		get_func(token, &stack, line_number);
 		token = NULL;
-		token2 = NULL;	}
-
+		token2 = NULL;
+	}
 	fclose(fptr);
 	free_stack(stack);
-	exit(EXIT_SUCCESS);
+	return (0);
 }

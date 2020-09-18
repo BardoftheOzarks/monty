@@ -5,6 +5,7 @@
 #include <stddef.h>
 #include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 int var;
 /**
@@ -37,7 +38,7 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-void *get_func(char *str);
+int get_func(char *str, stack_t **stack, unsigned int line_number);
 void push(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
@@ -51,6 +52,7 @@ void swap(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
 void pchar(stack_t **stack, unsigned int line_number);
 void pstr(stack_t **stack, unsigned int line_number);
+void error(int errno, int *line_number, char *str);
 void free_stack(stack_t *stack);
 
 #endif /*MONTY_H*/
