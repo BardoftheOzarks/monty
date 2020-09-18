@@ -25,7 +25,6 @@ void divide(stack_t **stack, unsigned int line_number)
 		}
 		a = first->n;
 		b = second->n;
-		printf("%d\n", b);
 		second->n = b / a;
 		free(first);
 		*stack = second;
