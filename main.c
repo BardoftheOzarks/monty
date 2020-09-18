@@ -35,12 +35,15 @@ int main(int ac, char **av)
 			token = strtok(buffer, " \n");
 		if (strcmp(token, "push") == 0)
 		{
-			while (token2 == NULL)
-				token2 = strtok(NULL, " \n");
-			if (cust_isdigit(token2) == 1)
-				var = atoi(token2);
-			else
-				error(3, &line_number, NULL);
+			if ((token2 = strtok(NULL, " \n")))
+            {
+                if (cust_isdigit(token2) == 1)
+                    var = atoi(token2);
+                else
+                    error(3, &line_number, NULL);
+            }
+            else
+                error(3, &line_number, NULL);
 		}
 		get_func(token, &stack, line_number);
 		token = NULL;
@@ -63,7 +66,7 @@ int cust_isdigit(char *str)
 
 	for (i = 0; str[i]; i++)
 	{
-		if (isdigit(str[i]) == 0)
+		if (isdigit(str[i]) == 0 && str[i] != '-')
 			return (0);
 	}
 	return (1);
