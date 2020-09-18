@@ -22,7 +22,7 @@ void push(stack_t **stack, unsigned int line_number)
 	new->prev = NULL;
 	new->n = var;
 
-    if (*stack != NULL)
-	    (*stack)->prev = new;
+	if (*stack != NULL)
+		(*stack)->prev = new;
 	*stack = new;
 }
