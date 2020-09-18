@@ -7,7 +7,7 @@
  * @str: String to be passed into function such as filename.
  */
 
-void error(int errno, int *line_number, char *str)
+void error(int errno, unsigned int *line_number, char *str)
 {
 	if (str == NULL)
 		(void) str;
@@ -21,7 +21,7 @@ void error(int errno, int *line_number, char *str)
 			exit(EXIT_FAILURE);
 
 		case 2:
-			fprintf(stderr, "Can't open file %s\n", str);
+			fprintf(stderr, "Error: Can't open file %s\n", str);
 			exit(EXIT_FAILURE);
 
 		case 3:

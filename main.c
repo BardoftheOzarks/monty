@@ -19,7 +19,7 @@ int main(int ac, char **av)
 		exit(EXIT_FAILURE);	}
 	fptr = fopen(av[1], "r");
 	if (fptr == NULL)
-	{	fprintf(stderr, "Can't open file %s\n", av[1]);
+	{	fprintf(stderr, "Error: Can't open file %s\n", av[1]);
 		exit(EXIT_FAILURE);
 	}
 	while (fgets(buffer, sizeof(buffer), fptr))

@@ -24,6 +24,10 @@ int get_func(char *str, stack_t **stack, unsigned int line_number)
 
 	for (i = 0; commands[i].opcode; i++)
 		if (strcmp(commands[i].opcode, str) == 0)
+		{
 			commands[i].f(stack, line_number);
-	return (0);
+			return (0);
+		}
+	error(4, &line_number, str);
+	return (1);
 }

@@ -52,7 +52,7 @@ void swap(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
 void pchar(stack_t **stack, unsigned int line_number);
 void pstr(stack_t **stack, unsigned int line_number);
-void error(int errno, int *line_number, char *str);
+void error(int errno, unsigned int *line_number, char *str);
 void free_stack(stack_t *stack);
 
 #endif /*MONTY_H*/
