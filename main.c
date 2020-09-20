@@ -14,6 +14,7 @@ int main(int ac, char **av)
 	char buffer[1024], *token = NULL, *token2 = NULL;
 	unsigned int line_number = 0, i;
 
+	global.mode = 0;
 	if (ac != 2)
 		error(1, NULL, NULL);
 	fptr = fopen(av[1], "r");
@@ -64,7 +65,7 @@ void cust_isdigit(char *str, unsigned int line_number)
 			retval = 0;
 	}
 	if (retval == 1)
-		var = atoi(str);
+		global.var = atoi(str);
 	else
 		error(3, &line_number, NULL);
 }

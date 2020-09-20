@@ -11,6 +11,7 @@ void pall(stack_t **stack, unsigned int line_number)
 
 	if (!flesh_wound)
 		return;
+
 	while (flesh_wound)
 	{
 		printf("%d\n", flesh_wound->n);
