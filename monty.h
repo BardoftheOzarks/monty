@@ -8,7 +8,21 @@
 #include <unistd.h>
 #include <ctype.h>
 
-int var;
+
+/**
+ * struct mode_var - Global struct for variables.
+ * @var: Variable int to store in nodes when created.
+ * @mode: Indicates stack or queue mode.
+ */
+
+typedef struct mode_var
+{
+	int var;
+	int mode;
+} mode_var;
+
+mode_var global;
+
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -53,6 +67,10 @@ void swap(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
 void pchar(stack_t **stack, unsigned int line_number);
 void pstr(stack_t **stack, unsigned int line_number);
+void rotl(stack_t **stack, unsigned int line_number);
+void rotr(stack_t **stack, unsigned int line_number);
+void stack_mode(stack_t **stack, unsigned int line_number);
+void queue(stack_t **stack, unsigned int line_number);
 void error(int errno, unsigned int *line_number, char *str);
 void cust_isdigit(char *str, unsigned int line_number);
 void free_stack(stack_t *stack);

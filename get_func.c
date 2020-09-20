@@ -1,4 +1,5 @@
 #include "monty.h"
+
 /**
  * get_func - selects function from string
  * @str: Input command
@@ -25,15 +26,21 @@ int get_func(char *str, stack_t **stack, unsigned int line_number)
 		{"nop", nop},
 		{"pchar", pchar},
 		{"pstr", pstr},
+		{"rotl", rotl},
+		{"rotr", rotr},
+		{"stack", stack_mode},
+		{"queue", queue},
 		{NULL, NULL}
 	};
 
 	for (i = 0; commands[i].opcode; i++)
+	{
 		if (strcmp(commands[i].opcode, str) == 0)
 		{
 			commands[i].f(stack, line_number);
 			return (0);
 		}
+	}
 	error(4, &line_number, str);
 	return (1);
 }
